@@ -30,6 +30,17 @@ def get_aff_name(a):
     return aff_name[0]
 
 
+def find_aff(a):
+
+    aaa = [x for x in a if x.has_attr('colspan')]
+
+    # bbb = aaa[0]
+    # b = [list(x.children) for x in aaa]
+
+
+    return aaa
+
+
 if __name__ == "__main__":
 
 
@@ -40,6 +51,8 @@ if __name__ == "__main__":
             soup = f.readlines()
     
         page = "\n".join(soup)
+
+        print('reading page from local storage')
     
     except:
     
@@ -47,6 +60,8 @@ if __name__ == "__main__":
     
         with urllib.request.urlopen(link) as response:
             page = response.read()
+
+        print('reading page from web storage')
     
     
     soup = bs(page, 'html.parser')
@@ -60,6 +75,8 @@ if __name__ == "__main__":
     
     titles = a.contents[3].select('a')
     aff_name = titles[0].get_attribute_list('title')
+
+    aaa = find_aff(a.select('td'))
     
     # aff_name = get_aff_name(a)
     
